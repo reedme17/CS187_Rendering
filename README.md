@@ -5,3 +5,6 @@ Nori is a simple ray tracer written in C++. It runs on Windows, Linux, and Mac O
 ### Course information and framework documentation
 
 For access to course information including slides, reading material, and assignment descriptions, visit the main [Rendering Algorithms website] (https://canvas.dartmouth.edu/courses/20530).
+
+Rendering Competition 2017
+http://www.cs.dartmouth.edu/~rendering-competition/sp2017/
