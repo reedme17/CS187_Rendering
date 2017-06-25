@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<scene>
+	<!-- ----------------------------------------------------------------- -->
+	<!--  Set up for the integrator -->
+	<!-- ----------------------------------------------------------------- -->
+	
+	<integrator type="path_vol2"/>
+	
+	<sampler type="independent">
+		<integer name="sampleCount" value="512"/>
+	</sampler>
+	
+	<!-- ----------------------------------------------------------------- -->
+	<!-- scene set up: camera, light, floor -->
+	<!-- ----------------------------------------------------------------- -->
+	
+	<!-- camera -->
+	<camera type="perspective">
+		<float name="fov" value="40"/>
+		<transform name="toWorld">
+			<scale value="-1,1,1"/>
+			<lookat target="0, 0.893051, 4.41198" 
+					origin="0, 0.919769, 5.41159" 
+					up="0, 1, 0"/>
+		</transform>
+
+		<integer name="height" value="650"/>
+		<integer name="width" value="1000"/>
+	</camera>
+	
+	<!-- Setup a distant sphere emitter -->
+	<emitter type="environmental light"> 
+		<color name="radiance" value="1,1,1"/>
+		<float name="thetaA" value="180" />
+		<transform name="toWorld">
+			<rotate axis="1,0,0" angle="45"/>
+            <lookat origin="0,0,0" 
+					target="0.602619,0.611322,0.112968" 
+					up="0,0,1"/>
+		</transform>
+		<texture type="image_texture">
+			<string name="filename" value="texture/map.png"/>
+		</texture>
+	</emitter>
+	
+	<!-- area light: light behind the curtain -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/light.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="1, 1, 1"/>
+		</bsdf>
+		<emitter type="area">
+			<color name="radiance" value="1, 1, 1"/>
+		</emitter>
+	</mesh>
+	
+	<!-- extra light -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/light2.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="1, 1, 1"/>
+		</bsdf>
+		<emitter type="area">
+			<color name="radiance" value="2.48, 2.04, 1.36"/>
+		</emitter>
+	</mesh>
+	
+	<!-- floor --> 
+	<mesh type="obj">
+		<string name="filename" value="meshes/plane.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="1 1 1"/>
+		</bsdf>
+	</mesh>
+	
+	<!-- ----------------------------------------------------------------- -->
+	<!-- set up the object in the scene --> 
+	<!-- ----------------------------------------------------------------- -->
+	
+	<!-- wall + window -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/window.obj"/>
+		<bsdf type="specular with texture">
+			<color name="albedo" value="0.18 0.48 0.47"/>
+			<color name="specular" value="0.67, 0.5, 0.33"/>
+			<float name="exponent" value="50"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/wall2.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<!-- curtain -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/curtain3.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="1, 1, 1"/>
+			<float name="transparency" value="0.7"/>
+		</bsdf>
+		<medium type="homogeneous">
+			<color name="absorption" value="0.00338 0.00328 0.003212"/>
+			<color name="scattering" value="0.01 0.01 0.01"/>
+		</medium>
+	</mesh>
+	
+	<!-- table -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/table.obj"/>
+		<bsdf type="fresnel diffuse with texture">
+			<texture type="image_texture">
+				<string name="filename" value="texture/table.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<!-- apples -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/apples.obj"/>
+		<bsdf type="blinn with texture">
+			<float name="exponent" value="800"/>
+			<float name="specular" value="0.04"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/appleDiff.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	
+	<!-- cup -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/cup.obj"/>
+		<bsdf type="blinn with texture">
+			<float name="exponent" value="800"/>
+			<float name="specular" value="0.08"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/cup.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<!-- tea cup -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/teaCup.obj"/>
+		<bsdf type="diffuse with texture">
+			<texture type="image_texture">
+				<string name="filename" value="texture/teacup.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	<mesh type="obj">
+		<string name="filename" value="meshes/teaCup_water.obj"/>
+		<bsdf type="blinn">
+			<color name="kd" value="0.4075, 0.1495, 0.1515"/>
+			<float name="ks" value="0.8"/>
+			<float name="exponent" value="100"/>
+		</bsdf>
+	</mesh>
+	
+	<!-- vase -->
+	<!-- Water<->Air interface -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1"/>
+			<float name="intIOR" value="1.33"/>
+		</bsdf>
+	</mesh>
+	<!-- Water<->Air interface -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase_a2w.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1"/>
+			<float name="intIOR" value="1.33"/>
+		</bsdf>
+	</mesh>
+	<!-- Glass<->Air interface -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase_g2a.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1"/>
+			<float name="intIOR" value="1.5"/>
+		</bsdf>
+	</mesh>
+	<!-- Glass<->Water interface -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase_g2w.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1.5"/>
+			<float name="intIOR" value="1.33"/>
+		</bsdf>
+	</mesh>
+	
+	<!-- flowers --> 
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_main1.obj"/>
+		<bsdf type="diffuse with texture">
+			<texture type="image_texture">
+				<string name="filename" value="texture/stem1.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_main2.obj"/>
+		<bsdf type="diffuse with texture">
+			<texture type="image_texture">
+				<string name="filename" value="texture/stem2.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_main3.obj"/>
+		<bsdf type="diffuse with texture">
+			<texture type="image_texture">
+				<string name="filename" value="texture/stem3.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_leaf.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="0.248, 0.204, 0.136"/>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower1.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="1 0.2 0.3"/>
+			<float name="transparency" value="0.2"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/rose2.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower2.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="1 0.1 0.1"/>
+			<float name="transparency" value="0.2"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/rose3.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower3.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="0.8 0.2 0.5"/>
+			<float name="transparency" value="0.2"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/rose3.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	
+	
+	<!-- old vase -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase_old.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1"/>
+			<float name="intIOR" value="1.33"/>
+		</bsdf>
+	</mesh>
+	<mesh type="obj">
+		<string name="filename" value="meshes/vase_oldwater.obj"/>
+		<bsdf type="dielectric">
+			<float name="extIOR" value="1"/>
+			<float name="intIOR" value="1.33"/>
+		</bsdf>
+		<medium type="homogeneous">
+			<color name="absorption" value="0.0238 0.0408 1"/>
+			<color name="scattering" value="0.01038 0.01029 0.0001"/>
+		</medium>
+	</mesh>
+	
+	<!-- old flower -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_main_old.obj"/>
+		<bsdf type="microfacet">
+			<color name="kd" value="0.248, 0.204, 0.136"/>
+			<float name="alpha" value="0.02"/>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_leaf_old.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="0.248, 0.204, 0.136"/>
+			<float name="transparency" value="0.0"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/leaf_old.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<string name="filename" value="meshes/flower_old.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="1 0.2 0.3"/>
+			<float name="transparency" value="0.1"/>
+			<texture type="image_texture">
+				<string name="filename" value="texture/rose_old.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	
+	
+	
+	
+</scene>

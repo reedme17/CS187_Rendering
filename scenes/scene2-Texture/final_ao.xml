@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<scene>
+	<!-- ----------------------------------------------------------------- -->
+	<!--  Set up for the integrator -->
+	<!-- ----------------------------------------------------------------- -->
+	
+	<integrator type="path_mis"/>
+	
+	<sampler type="independent">
+		<integer name="sampleCount" value="512"/>
+	</sampler>
+	
+	<!-- ----------------------------------------------------------------- -->
+	<!-- scene set up: camera, light, floor -->
+	<!-- ----------------------------------------------------------------- -->
+	
+	<!-- camera -->
+	<camera type="perspective">
+		<float name="fov" value="40"/>
+		<transform name="toWorld">
+			<scale value="-1,1,1"/>
+			<lookat target="0, 0.893051, 4.41198" 
+					origin="0, 0.919769, 5.41159" 
+					up="0, 1, 0"/>
+		</transform>
+
+		<integer name="height" value="600"/>
+		<integer name="width" value="900"/>
+	</camera>
+	
+	<!-- Setup a distant sphere emitter -->
+	<emitter type="distantsphere"> 
+		<color name="radiance" value="1,1,1"/>
+		<float name="thetaA" value="180" />
+		<transform name="toWorld">
+			<rotate axis="1,0,0" angle="0"/>
+		</transform>
+	</emitter>
+	
+	
+	<!-- ----------------------------------------------------------------- -->
+	<!-- set up the object in the scene --> 
+	<!-- ----------------------------------------------------------------- -->
+	
+	<!-- wall + window -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/window.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="0.5 0.5 0.5"/>
+		</bsdf>
+	</mesh>
+	
+	<!-- curtain -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/curtain.obj"/>
+		<bsdf type="paper">
+			<color name="albedo" value="1, 1, 1"/>
+			<float name="transparency" value="0.5"/>
+			<texture type="image_texture">
+				<string name="filename" value="meshes/wall2.png"/>
+			</texture>
+		</bsdf>
+	</mesh>
+	
+	<!-- table -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/table.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="0.5 0.5 0.5"/>
+		</bsdf>
+	</mesh>
+	
+	
+	
+	
+	
+</scene>

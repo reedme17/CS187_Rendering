@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<scene>
+	<integrator type="path_mis"/>
+
+	<sampler type="independent">
+		<integer name="sampleCount" value="128"/>
+	</sampler>
+	
+	<camera type="perspective">
+		<float name="fov" value="27.7856"/>
+		<transform name="toWorld">
+			<scale value="-1,1,1"/>
+			<lookat target="0, 0.893051, 4.41198" origin="0, 0.919769, 5.41159" up="0, 1, 0"/>
+		</transform>
+
+		<integer name="height" value="600"/>
+		<integer name="width" value="600"/>
+	</camera>
+	
+	
+	
+	<emitter type="environmental light"> 
+		<color name="radiance" value="1,1,1"/>
+		<float name="thetaA" value="180" />
+		<transform name="toWorld">
+			<rotate axis="1,0,0" angle="45"/>
+            <lookat origin="0,0,0" 
+					target="0.602619,0.611322,0.112968" 
+					up="0,0,1"/>
+		</transform>
+		<texture type="image_texture">
+			<string name="filename" value="meshes/map2.png"/>
+		</texture>
+	</emitter>
+	
+	
+
+
+	<mesh type="obj">
+		<string name="filename" value="meshes/sphere1.obj"/>
+		<transform name="toWorld">
+			<scale value="2, 2, 2"/>
+			<translate value="0.85, 0.2, 0.2"/>
+		</transform>
+		<bsdf type="mirror">
+		</bsdf>
+	</mesh>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</scene>

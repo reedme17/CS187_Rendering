@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scene>
+	<integrator type="path_mis"/>
+	
+	<sampler type="independent">
+		<integer name="sampleCount" value="128"/>
+	</sampler>
+
+	<camera type="perspective">
+		<transform name="toWorld">
+			<lookat origin="25, 20, 40" 
+				target="0, 4, 0"
+				up="0, 1, 0"/>
+		</transform>
+		<float name="fov" value="39.3077"/>
+		<integer name="width" value="768"/>
+		<integer name="height" value="432"/>
+	</camera>
+
+	<!-- micro_dielectric -->
+	<mesh type="obj">
+		<transform name="toWorld">
+			<translate value="0, 2, 2"/>
+			<scale value="20, 5, 0.5"/>
+		</transform>
+		<string name="filename" value="meshes/cube.obj"/>
+		<bsdf type="micro_dielectric">
+			<color name="kd" value="0.0175, 0.0225, 0.0325"/>
+			<float name="alpha" value="0.0"/>
+		</bsdf>
+	</mesh>
+	
+	<mesh type="obj">
+		<transform name="toWorld">
+			<translate value="0, 0.8, 2"/>
+			<scale value="20, 5, 0.5"/>
+		</transform>
+		<string name="filename" value="meshes/cube.obj"/>
+		<bsdf type="micro_dielectric">
+			<color name="kd" value="0.0175, 0.0225, 0.0325"/>
+			<float name="alpha" value="0.5"/>
+		</bsdf>
+	</mesh>
+		
+		
+		
+		
+	<!-- monolith -->
+	<mesh type="obj">
+		<transform name="toWorld">
+			<translate value="0, 0.5, -0.5"/>
+			<scale value="10, 20, 10"/>
+		</transform>
+		<string name="filename" value="meshes/cube.obj"/>
+		<bsdf type="diffuse">
+			<color name="albedo" value="1.5, 0.2, 0.2"/>
+		</bsdf>
+	</mesh>
+	
+	
+	<!-- floor -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/cube.obj"/>
+		<transform name="toWorld">
+			<translate value="0, -0.5, 0"/>
+			<scale value="80, 1, 100"/>
+		</transform>
+		<bsdf type="diffuse">
+			<color name="albedo" value="0.9, 0.9, 0.9"/>
+		</bsdf>
+	</mesh>
+
+	<!-- glowing wall -->
+	<mesh type="obj">
+		<string name="filename" value="meshes/cube.obj"/>
+		<transform name="toWorld">
+			<translate value="0, 0.5, 0"/>
+			<scale value="1, 50, 100"/>
+			<translate value="-12, 0, 0"/>
+		</transform>
+		<bsdf type="diffuse">
+			<color name="albedo" value="0.0, 0.0, 0.0"/>
+		</bsdf>
+		<emitter type="area">
+			<color name="radiance" value="1, 1, 1"/>
+		</emitter>
+	</mesh>
+</scene>
